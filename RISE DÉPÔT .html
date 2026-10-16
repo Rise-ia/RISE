@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISE — Déposer une vidéo</title>
+<style>
+:root{--blue:#146bff;--cyan:#28d7f2;--ink:#10213f;--muted:#65738b;--bg:#f4f8ff;--line:#dce6f5}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#f7fbff,#eaf4ff);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,60px);background:#ffffffd9;border-bottom:1px solid var(--line)}
+.brand{font-size:27px;font-weight:950;letter-spacing:2px;color:var(--blue)}.brand span{color:var(--cyan)}.tag{font-size:12px;color:var(--muted)}
+main{max-width:850px;margin:34px auto;padding:0 16px 48px}.eyebrow{color:var(--blue);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.05;margin:10px 0 12px;letter-spacing:-1.5px}.lead{color:var(--muted);line-height:1.6;max-width:650px;margin:0 0 26px}
+.card{background:white;border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 18px 55px #17427a10;margin-bottom:18px}
+.section-title{font-size:18px;font-weight:850;margin:0 0 6px}.hint{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 18px}
+.drop{display:block;border:2px dashed #9ebdf8;background:#f6faff;border-radius:17px;padding:28px 16px;text-align:center;cursor:pointer;transition:.2s}
+.drop:hover{border-color:var(--blue);background:#eff6ff}.upload-icon{font-size:34px;margin-bottom:9px}.drop strong{display:block;font-size:16px}.drop small{display:block;color:var(--muted);margin-top:8px;line-height:1.5}input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.fileinfo{display:none;background:#eefafc;border:1px solid #b7edf5;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:13px;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}.field input,.field select{width:100%;padding:13px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #146bff18}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:12px;padding:14px 18px;font-weight:850;font-size:14px;cursor:pointer}.primary{background:linear-gradient(100deg,var(--blue),#00bfe8);color:white;box-shadow:0 8px 20px #146bff30}.secondary{background:#edf3fc;color:var(--ink)}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:16px}.result{display:none;margin-top:16px;border-radius:14px;padding:16px;background:#effaf4;border:1px solid #b9e9cb;color:#165b36;line-height:1.55}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.step{border:1px solid var(--line);background:#fbfdff;border-radius:14px;padding:13px}.num{display:inline-grid;place-items:center;width:25px;height:25px;background:#e8f2ff;color:var(--blue);border-radius:8px;font-weight:900;font-size:12px;margin-bottom:8px}.step strong{display:block;font-size:13px}.step small{display:block;color:var(--muted);font-size:12px;margin-top:5px;line-height:1.4}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.step{display:flex;gap:10px;align-items:flex-start}.num{flex-shrink:0}.step small{margin-top:3px}}
+</style>
+</head>
+<body>
+<header><div class="brand">RISE<span>.</span></div><div class="tag">TON TALENT. NOTRE MISSION.</div></header>
+<main>
+  <div class="eyebrow">Espace joueur · Prototype</div>
+  <h1>Prépare ton match.<br><span style="color:var(--blue)">Révèle ton talent.</span></h1>
+  <p class="lead">Choisis une vidéo et indique les informations utiles pour aider RISE à identifier le bon joueur sur le terrain.</p>
+
+  <form id="riseForm">
+    <section class="card">
+      <h2 class="section-title">1. Ta vidéo</h2>
+      <p class="hint">Pour notre premier test, commence par un extrait court. Les matchs complets seront pris en charge dans une étape ultérieure.</p>
+      <label class="drop" for="video">
+        <div class="upload-icon">⬆️</div>
+        <strong>Choisir une vidéo depuis mon iPhone</strong>
+        <small>Appuie ici pour ouvrir ta photothèque ou tes fichiers.<br>Formats habituels : MP4, MOV · Conseil de test : 30 secondes à 3 minutes.</small>
+      </label>
+      <input id="video" type="file" accept="video/*">
+      <div class="fileinfo" id="fileinfo"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">2. Identifier le joueur</h2>
+      <p class="hint">Ces informations aideront à préparer une analyse adaptée au joueur que tu veux suivre.</p>
+      <div class="grid">
+        <div class="field"><label for="player">Nom du joueur (facultatif)</label><input id="player" placeholder="Ex. : Yassine"></div>
+        <div class="field"><label for="position">Poste</label><select id="position"><option value="">Choisir un poste</option><option>Gardien</option><option>Défenseur central</option><option>Latéral</option><option>Milieu défensif</option><option>Milieu central</option><option>Milieu offensif</option><option>Ailier</option><option>Avant-centre</option></select></div>
+        <div class="field"><label for="number">Numéro de maillot</label><input id="number" inputmode="numeric" type="number" min="1" max="99" placeholder="Ex. : 10"></div>
+        <div class="field"><label for="shirt">Couleur du maillot</label><select id="shirt"><option value="">Choisir une couleur</option><option>Rouge</option><option>Bleu</option><option>Blanc</option><option>Noir</option><option>Vert</option><option>Jaune</option><option>Autre</option></select></div>
+      </div>
+      <div class="actions"><button class="btn primary" type="submit">Préparer mon analyse →</button><button class="btn secondary" type="reset" id="reset">Réinitialiser</button></div>
+      <p class="note">Prototype de démonstration : le fichier reste sur ton appareil. Rien n’est envoyé à un serveur et aucune IA n’analyse encore la vidéo.</p>
+      <div class="result" id="result" role="status"></div>
+    </section>
+  </form>
+
+  <section class="card">
+    <h2 class="section-title">Comment RISE va fonctionner</h2>
+    <p class="hint">Le parcours visé pour la version complète.</p>
+    <div class="steps">
+      <div class="step"><span class="num">1</span><div><strong>Importer</strong><small>Le joueur choisit son extrait ou, à terme, son match complet.</small></div></div>
+      <div class="step"><span class="num">2</span><div><strong>Analyser</strong><small>L’IA cherchera les dribbles, passes, tirs, buts et accélérations.</small></div></div>
+      <div class="step"><span class="num">3</span><div><strong>Créer</strong><small>Préparer une version recruteur et des clips courts pour les réseaux.</small></div></div>
+    </div>
+  </section>
+</main>
+<footer>RISE · Maquette interactive — pas encore un service de dépôt ou d’analyse réel.</footer>
+<script>
+const video=document.getElementById('video'), info=document.getElementById('fileinfo'), form=document.getElementById('riseForm'), result=document.getElementById('result');
+video.addEventListener('change',()=>{const f=video.files[0];if(!f){info.style.display='none';return;}info.style.display='block';info.textContent='Vidéo sélectionnée : '+f.name+' · '+(f.size/1024/1024).toFixed(1)+' Mo. Elle reste sur cet appareil dans cette maquette.';});
+form.addEventListener('submit',e=>{e.preventDefault();if(!video.files[0]){result.style.display='block';result.style.background='#fff8e9';result.style.borderColor='#f2d59a';result.style.color='#76521b';result.textContent='Choisis d’abord une vidéo pour continuer.';return;}result.style.display='block';result.style.background='#effaf4';result.style.borderColor='#b9e9cb';result.style.color='#165b36';result.innerHTML='<strong>Parcours préparé !</strong><br>La prochaine étape sera de connecter un vrai serveur et un moteur d’analyse vidéo. Pour l’instant, aucune vidéo n’a été envoyée ni analysée.';});
+form.addEventListener('reset',()=>{setTimeout(()=>{info.style.display='none';result.style.display='none';},0);});
+</script>
+</body>
+</html>

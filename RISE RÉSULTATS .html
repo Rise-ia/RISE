@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISE — Résultats de l'analyse</title>
+<style>
+:root{--blue:#146bff;--cyan:#20d2ef;--ink:#10213f;--muted:#63738b;--line:#dce6f5;--bg:#f4f8ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#f8fbff,#edf5ff);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,60px);background:#ffffffdd;border-bottom:1px solid var(--line)}.brand{font-size:27px;font-weight:950;letter-spacing:2px;color:var(--blue)}.brand span{color:var(--cyan)}.tag{font-size:12px;color:var(--muted)}
+main{max-width:1000px;margin:32px auto;padding:0 16px 46px}.eyebrow{font-size:12px;letter-spacing:1.5px;color:var(--blue);font-weight:850;text-transform:uppercase}h1{font-size:clamp(30px,5vw,44px);line-height:1.08;letter-spacing:-1.5px;margin:10px 0}.lead{color:var(--muted);line-height:1.6;margin:0 0 24px;max-width:700px}
+.status{display:flex;gap:12px;align-items:center;background:#eef7ff;border:1px solid #c9e1ff;padding:14px 16px;border-radius:15px;margin:20px 0}.pulse{width:11px;height:11px;background:var(--blue);border-radius:50%;box-shadow:0 0 0 5px #146bff18;flex-shrink:0}.status strong{display:block;font-size:14px}.status small{display:block;color:var(--muted);margin-top:4px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.8fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:21px;padding:22px;box-shadow:0 18px 50px #17427a0c}.card h2{font-size:18px;margin:0 0 6px}.sub{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 18px}
+.player{border-radius:16px;min-height:230px;background:linear-gradient(135deg,#0c2147,#123e7e 60%,#087eaa);display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:22px;position:relative;overflow:hidden}.pitch{position:absolute;inset:15px;border:1px solid #ffffff44;border-radius:8px;pointer-events:none}.pitch:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px solid #ffffff44}.pitch:after{content:"";position:absolute;left:calc(50% - 42px);top:calc(50% - 42px);width:84px;height:84px;border:1px solid #ffffff44;border-radius:50%}.play{position:relative;z-index:1;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;background:#ffffffeb;color:var(--blue);font-size:22px;margin:0 auto 12px}.player strong,.player small{position:relative;z-index:1;display:block}.player small{color:#d6eaff;margin-top:6px;font-size:12px}.notice{font-size:12px;line-height:1.5;color:var(--muted);margin:12px 0 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.chip{border:1px solid var(--line);background:#f7faff;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:750;color:#3b4d69}.chip.active{background:#e9f2ff;color:var(--blue);border-color:#bdd5ff}
+.action{display:grid;grid-template-columns:65px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid #edf1f8}.thumb{height:51px;border-radius:11px;background:linear-gradient(135deg,#0c2147,#0e7caa);display:grid;place-items:center;color:white;font-size:18px}.action strong{font-size:13px;display:block}.action small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.time{font-size:12px;font-weight:850;color:var(--blue);white-space:nowrap}
+.badge{display:inline-block;border-radius:8px;padding:5px 7px;background:#eaf8f2;color:#16784c;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.sidebox{background:#f6faff;border:1px solid var(--line);border-radius:15px;padding:15px;margin-top:14px}.sidebox strong{display:block;font-size:13px}.sidebox p{color:var(--muted);font-size:12px;line-height:1.5;margin:6px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:13px 15px;font-size:13px;font-weight:850;cursor:pointer;text-decoration:none}.primary{background:linear-gradient(100deg,var(--blue),#00bfe8);color:white;box-shadow:0 8px 20px #146bff25}.secondary{background:#edf3fc;color:var(--ink)}.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.bottom{margin-top:18px}.bottom .card{box-shadow:none}.progress{height:8px;border-radius:99px;background:#e7eef9;overflow:hidden;margin:13px 0}.progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.player{min-height:205px}.action{grid-template-columns:54px minmax(0,1fr) auto}.thumb{height:45px}.card{padding:18px}}
+</style></head>
+<body>
+<header><div class="brand">RISE<span>.</span></div><div class="tag">TON TALENT. NOTRE MISSION.</div></header>
+<main>
+<div class="eyebrow">Espace joueur · Aperçu des résultats</div>
+<h1>Ton match. <span style="color:var(--blue)">Tes moments forts.</span></h1>
+<p class="lead">Retrouve ici les actions sélectionnées et prépare tes formats de partage. Cet écran montre à quoi ressemblera le résultat quand l’analyse réelle sera connectée.</p>
+<div class="status"><span class="pulse"></span><div><strong>Écran de démonstration — données fictives</strong><small>Les actions et horaires ci-dessous illustrent l’interface. Aucune vidéo n’a été analysée par une IA.</small></div></div>
+<div class="grid">
+<section class="card">
+<h2>Aperçu vidéo</h2><p class="sub">Le joueur pourra prévisualiser chaque action avant de générer son montage.</p>
+<div class="player"><div class="pitch"></div><div><div class="play">▶</div><strong>Aperçu du clip sélectionné</strong><small>La lecture vidéo sera disponible après connexion du vrai système.</small></div></div>
+<div class="filters"><span class="chip active">Toutes les actions · 4</span><span class="chip">Dribbles</span><span class="chip">Passes</span><span class="chip">Tirs / buts</span><span class="chip">Accélérations</span></div>
+<div class="action"><div class="thumb">↗</div><div><strong>Progression balle au pied</strong><small>Exemple de catégorie · clip fictif</small></div><span class="time">02:14</span></div>
+<div class="action"><div class="thumb">⇢</div><div><strong>Passe vers l’avant</strong><small>Exemple de catégorie · clip fictif</small></div><span class="time">07:32</span></div>
+<div class="action"><div class="thumb">⚽</div><div><strong>Tir au but</strong><small>Exemple de catégorie · clip fictif</small></div><span class="time">11:06</span></div>
+<div class="action"><div class="thumb">⚡</div><div><strong>Accélération</strong><small>Exemple de catégorie · clip fictif</small></div><span class="time">16:41</span></div>
+<p class="notice">Les filtres et les horaires sont illustratifs pour le moment. La détection automatique reste à développer et à tester.</p>
+</section>
+<aside class="card">
+<h2>Préparer mon montage</h2><p class="sub">Deux formats pensés pour deux usages.</p>
+<div class="sidebox"><span class="badge">Recruteur</span><strong style="margin-top:9px">Montage professionnel</strong><p>Actions lisibles, séquence organisée et présentation adaptée à un profil joueur.</p><div class="btnrow"><button class="btn secondary" type="button" data-msg="Le montage recruteur sera disponible quand l’analyse et l’export vidéo seront connectés.">Préparer ce format</button></div></div>
+<div class="sidebox"><span class="badge" style="background:#e9f7ff;color:#1269a5">Réseaux sociaux</span><strong style="margin-top:9px">Clips dynamiques</strong><p>Clips verticaux courts, prêts à adapter pour TikTok et Reels.</p><div class="btnrow"><button class="btn secondary" type="button" data-msg="Les clips verticaux seront disponibles après connexion du moteur de montage.">Préparer ce format</button></div></div>
+<div class="btnrow"><button class="btn primary" id="share" type="button">Partager mon profil ↗</button></div>
+<p class="notice">Le partage réel sera activé lorsque le profil et les réglages de confidentialité seront en place.</p>
+</aside></div>
+<div class="bottom"><section class="card"><h2>La suite du parcours</h2><div class="progress"><span></span></div><p class="sub" style="margin-bottom:0">Maquette de l’écran terminée · Prochain travail : connecter un moteur d’analyse, générer de vrais clips et tester la qualité avant de proposer le service aux joueurs.</p></section></div>
+</main>
+<footer>RISE · Prototype d’interface · Aucun traitement vidéo réel pour le moment.</footer>
+<script>
+document.querySelectorAll('[data-msg]').forEach(b=>b.addEventListener('click',()=>alert(b.dataset.msg)));
+document.getElementById('share').addEventListener('click',()=>alert('Le partage sera activé après la création des profils et des contrôles de confidentialité.')));
+</script>
+</body></html>

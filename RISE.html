@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISE — Ton talent. Notre mission.</title>
+<style>
+:root{--blue:#176bff;--cyan:#38d8f5;--ink:#12223e;--muted:#65738b;--bg:#f6f9ff;--line:#e0e9f8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
+.wrap{max-width:1060px;margin:auto;padding:22px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:-1.2px}
+.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#fff;font-size:25px;font-weight:900;box-shadow:0 8px 20px #176bff2b}
+.lang{border:1px solid var(--line);border-radius:999px;background:white;padding:9px 13px;color:var(--ink);font-weight:700}
+.hero{padding:62px 0 42px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:32px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#eaf7ff;color:#176bff;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.07em;text-transform:uppercase}
+h1{font-size:clamp(42px,7vw,72px);line-height:.98;letter-spacing:-.055em;margin:20px 0}
+h1 span{background:linear-gradient(90deg,var(--blue),#18bde7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;line-height:1.65;color:var(--muted);max-width:560px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:14px;padding:15px 21px;font-weight:850;font-size:15px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.primary{color:white;background:linear-gradient(100deg,var(--blue),#19bce8);box-shadow:0 12px 24px #176bff2a}
+.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+.visual{background:linear-gradient(145deg,#edf7ff,#fff 65%);border:1px solid #d9eaff;border-radius:28px;padding:22px;box-shadow:0 25px 70px #1d68d312;position:relative;overflow:hidden}
+.visual:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#5bdff522;right:-90px;top:-90px}
+.preview{position:relative;background:#102744;border-radius:20px;min-height:270px;padding:20px;color:white;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.pitch{position:absolute;inset:0;opacity:.35;background:repeating-linear-gradient(90deg,#1b9658 0,#1b9658 12.5%,#147749 12.5%,#147749 25%)}
+.pitch:after{content:"";position:absolute;inset:16px;border:1px solid #ffffffa8;border-radius:8px}
+.preview-top,.preview-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pill{font-size:11px;font-weight:800;background:#ffffff20;border:1px solid #ffffff35;border-radius:999px;padding:7px 10px}
+.play{position:relative;z-index:1;align-self:center;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-size:23px;box-shadow:0 8px 24px #0004}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;position:relative}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat strong{display:block;font-size:19px}.stat small{color:var(--muted);font-size:11px}
+.section{padding:32px 0}
+.section h2{font-size:28px;letter-spacing:-.03em;margin:0 0 9px}
+.section-intro{color:var(--muted);line-height:1.6;margin:0 0 20px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feature{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#edf6ff;color:var(--blue);font-size:21px}
+.feature h3{margin:14px 0 7px;font-size:16px}.feature p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+.upload{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}
+input,select{width:100%;padding:13px;border:1px solid #d7e2f3;border-radius:12px;background:#fff;font:inherit;color:var(--ink)}
+input[type=file]{padding:10px}
+.full{grid-column:1/-1}
+.result{display:none;margin-top:16px;border-radius:14px;background:#f0f8ff;border:1px solid #cfe8ff;padding:14px;color:#214a77;line-height:1.5}
+footer{margin-top:35px;padding:24px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:42px}.visual{max-width:500px}.features{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.full{grid-column:auto}.wrap{padding:17px}.lead{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="brand"><div class="mark">R</div>RISE</div>
+  <button class="lang" id="langBtn" type="button">🇫🇷 FR / EN</button>
+</nav>
+<main>
+<section class="hero">
+ <div>
+  <div class="eyebrow" id="eyebrow">⚽ Football • IA en préparation</div>
+  <h1 id="headline">Ton talent.<br><span>Notre mission.</span></h1>
+  <p class="lead" id="lead">Transforme tes matchs en une vitrine de ton talent. RISE est pensé pour aider les joueurs à préparer leurs montages et à présenter leur parcours aux recruteurs.</p>
+  <div class="actions"><a class="btn primary" href="#start" id="startBtn">Commencer <span>↗</span></a><a class="btn secondary" href="#how" id="howBtn">Découvrir RISE</a></div>
+  <p class="note" id="honesty">Prototype de présentation : l’analyse automatique des matchs n’est pas encore activée.</p>
+ </div>
+ <div class="visual">
+  <div class="preview">
+   <div class="pitch"></div>
+   <div class="preview-top"><span class="pill">RISE PLAYER CARD</span><span class="pill">#7 • AILIER</span></div>
+   <div class="play">▶</div>
+   <div class="preview-bottom"><strong>PLAYER HIGHLIGHTS</strong><span class="pill">RECRUITER MODE</span></div>
+  </div>
+  <div class="statrow">
+   <div class="stat"><strong>01</strong><small id="s1">Profil joueur</small></div>
+   <div class="stat"><strong>02</strong><small id="s2">Montages</small></div>
+   <div class="stat"><strong>03</strong><small id="s3">Recruteurs</small></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="how">
+ <h2 id="featuresTitle">Conçu pour révéler le talent</h2>
+ <p class="section-intro" id="featuresIntro">Une expérience simple, du téléphone au profil sportif partageable.</p>
+ <div class="features">
+  <article class="feature"><div class="ico">🎬</div><h3 id="f1t">Montages de football</h3><p id="f1p">Objectif : une vidéo principale de 10 à 12 minutes maximum, avec des clips courts pour les réseaux sociaux.</p></article>
+  <article class="feature"><div class="ico">⚽</div><h3 id="f2t">Profil sportif</h3><p id="f2p">Présente ton poste, ton numéro, ton parcours en club et les vidéos que tu choisis de partager.</p></article>
+  <article class="feature"><div class="ico">🔒</div><h3 id="f3t">Confidentialité d’abord</h3><p id="f3p">Les profils doivent rester privés par défaut. Le joueur contrôle ce qu’il partage et peut demander la suppression de ses données.</p></article>
+ </div>
+</section>
+<section class="section" id="start">
+ <h2 id="startTitle">Préparer mon profil joueur</h2>
+ <p class="section-intro" id="startIntro">Cette maquette montre les informations que RISE pourra demander. Elle ne téléverse rien et ne sauvegarde aucune donnée.</p>
+ <div class="upload">
+  <form id="profileForm">
+   <div class="fields">
+    <div><label for="playerName" id="nameLabel">Nom du joueur</label><input id="playerName" autocomplete="name" placeholder="Ex. Alex Martin" required></div>
+    <div><label for="position" id="positionLabel">Poste</label><select id="position" required><option value="">Choisir un poste</option><option>Gardien</option><option>Défenseur</option><option>Milieu</option><option>Ailier</option><option>Attaquant</option></select></div>
+    <div><label for="number" id="numberLabel">Numéro de maillot</label><input id="number" type="number" min="1" max="99" placeholder="Ex. 7" required></div>
+    <div><label for="color" id="colorLabel">Couleur principale du maillot</label><select id="color" required><option value="">Choisir une couleur</option><option>Rouge</option><option>Bleu</option><option>Blanc</option><option>Noir</option><option>Jaune</option><option>Vert</option><option>Autre</option></select></div>
+    <div class="full"><label for="clubs" id="clubsLabel">Parcours en club (facultatif)</label><input id="clubs" placeholder="Clubs et saisons"></div>
+    <div class="full"><label for="video" id="videoLabel">Choisir une vidéo depuis la galerie (démo uniquement)</label><input id="video" type="file" accept="video/*"></div>
+   </div>
+   <div class="actions"><button class="btn primary" type="submit" id="previewBtn">Prévisualiser mon profil</button></div>
+   <div class="result" id="result" role="status"></div>
+  </form>
+ </div>
+</section>
+</main>
+<footer><span>© RISE — Ton talent. Notre mission.</span><span id="footerNote">Maquette de démonstration • Aucun compte ni téléversement réel</span></footer>
+</div>
+<script>
+const copy = {
+fr:{eyebrow:"⚽ Football • IA en préparation",headline:'Ton talent.<br><span>Notre mission.</span>',lead:"Transforme tes matchs en une vitrine de ton talent. RISE est pensé pour aider les joueurs à préparer leurs montages et à présenter leur parcours aux recruteurs.",start:"Commencer",how:"Découvrir RISE",honesty:"Prototype de présentation : l’analyse automatique des matchs n’est pas encore activée.",s1:"Profil joueur",s2:"Montages",s3:"Recruteurs",featuresTitle:"Conçu pour révéler le talent",featuresIntro:"Une expérience simple, du téléphone au profil sportif partageable.",f1t:"Montages de football",f1p:"Objectif : une vidéo principale de 10 à 12 minutes maximum, avec des clips courts pour les réseaux sociaux.",f2t:"Profil sportif",f2p:"Présente ton poste, ton numéro, ton parcours en club et les vidéos que tu choisis de partager.",f3t:"Confidentialité d’abord",f3p:"Les profils doivent rester privés par défaut. Le joueur contrôle ce qu’il partage et peut demander la suppression de ses données.",startTitle:"Préparer mon profil joueur",startIntro:"Cette maquette montre les informations que RISE pourra demander. Elle ne téléverse rien et ne sauvegarde aucune donnée.",name:"Nom du joueur",position:"Poste",number:"Numéro de maillot",color:"Couleur principale du maillot",clubs:"Parcours en club (facultatif)",video:"Choisir une vidéo depuis la galerie (démo uniquement)",preview:"Prévisualiser mon profil",footer:"Maquette de démonstration • Aucun compte ni téléversement réel",emptyPosition:"Choisir un poste",emptyColor:"Choisir une couleur",placeholderName:"Ex. Alex Martin",placeholderNumber:"Ex. 7",placeholderClubs:"Clubs et saisons",result:"Maquette uniquement : le profil de {name} est prévisualisé ici. La vidéo n’a pas été envoyée, aucune donnée n’a été sauvegardée et l’IA de montage n’est pas encore connectée."},
+en:{eyebrow:"⚽ Football • AI in development",headline:"Your talent.<br><span>Our mission.</span>",lead:"Turn your matches into a showcase of your talent. RISE is designed to help players prepare highlight reels and present their journey to scouts.",start:"Get started",how:"Discover RISE",honesty:"Design prototype: automatic match analysis is not active yet.",s1:"Player profile",s2:"Highlights",s3:"Scouts",featuresTitle:"Built to showcase talent",featuresIntro:"A simple experience, from your phone to a shareable player profile.",f1t:"Football highlights",f1p:"Goal: a main video up to 10–12 minutes, plus short clips for social media.",f2t:"Player profile",f2p:"Show your position, shirt number, club history and the videos you choose to share.",f3t:"Privacy first",f3p:"Profiles should be private by default. Players control what they share and can request deletion of their data.",startTitle:"Set up my player profile",startIntro:"This mockup shows information RISE may ask for. It does not upload or save anything.",name:"Player name",position:"Position",number:"Shirt number",color:"Main shirt colour",clubs:"Club history (optional)",video:"Choose a video from your gallery (demo only)",preview:"Preview my profile",footer:"Demo mockup • No real account or upload",emptyPosition:"Choose a position",emptyColor:"Choose a colour",placeholderName:"e.g. Alex Martin",placeholderNumber:"e.g. 7",placeholderClubs:"Clubs and seasons",result:"Mockup only: {name}'s profile is previewed here. The video was not uploaded, no data was saved, and the highlight AI is not connected yet."}
+};
+let lang="fr";
+function setLang(next){lang=next;const c=copy[lang];document.documentElement.lang=lang;
+document.getElementById("eyebrow").textContent=c.eyebrow;document.getElementById("headline").innerHTML=c.headline;document.getElementById("lead").textContent=c.lead;
+document.getElementById("startBtn").innerHTML=c.start+" <span>↗</span>";document.getElementById("howBtn").textContent=c.how;document.getElementById("honesty").textContent=c.honesty;
+["s1","s2","s3","featuresTitle","featuresIntro","f1t","f1p","f2t","f2p","f3t","f3p","startTitle","startIntro"].forEach(id=>document.getElementById(id).textContent=c[id]);
+["nameLabel","positionLabel","numberLabel","colorLabel","clubsLabel","videoLabel","previewBtn"].forEach((id,i)=>{const key=["name","position","number","color","clubs","video","preview"][i];document.getElementById(id).textContent=c[key]});
+document.getElementById("footerNote").textContent=c.footer;
+document.querySelector("#position option[value='']").textContent=c.emptyPosition;document.querySelector("#color option[value='']").textContent=c.emptyColor;
+document.getElementById("playerName").placeholder=c.placeholderName;document.getElementById("number").placeholder=c.placeholderNumber;document.getElementById("clubs").placeholder=c.placeholderClubs;
+document.getElementById("langBtn").textContent=lang==="fr"?"🇫🇷 FR / EN":"🇬🇧 EN / FR";
+}
+document.getElementById("langBtn").addEventListener("click",()=>setLang(lang==="fr"?"en":"fr"));
+document.getElementById("profileForm").addEventListener("submit",e=>{e.preventDefault();const name=document.getElementById("playerName").value.trim();document.getElementById("result").style.display="block";document.getElementById("result").textContent=copy[lang].result.replace("{name}",name);});
+</script>
+</body>
+</html>
