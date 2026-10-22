@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7fbff">
+<title>RISE Studio — Catalogue football</title>
+<style>
+:root{--ink:#09213b;--cyan:#13bad8;--paper:#f5f9fd;--muted:#5d7186;--line:#dbe7f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+a{color:inherit}button,input,select,textarea{font:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 18px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:12px}
+.logo{font-weight:950;letter-spacing:2px;font-size:25px}.logo span{color:var(--cyan)}.navnote{font-size:12px;color:var(--muted)}
+.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center}
+.kicker{font-size:12px;letter-spacing:2px;font-weight:800;color:#078ca8}
+h1{font-size:clamp(35px,6vw,66px);line-height:.98;letter-spacing:-2px;margin:12px 0 16px}
+.hero p{font-size:16px;line-height:1.6;color:var(--muted);max-width:610px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pill{background:white;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700}
+.hero-art{min-height:300px;border-radius:26px;background:linear-gradient(145deg,#0a2544,#0b4563);padding:20px;position:relative;overflow:hidden;color:white}
+.hero-art:before{content:"";position:absolute;width:270px;height:270px;border:38px solid #15c2df;opacity:.8;border-radius:50%;right:-70px;top:10px}
+.hero-art:after{content:"RISE";position:absolute;font-size:90px;font-weight:1000;letter-spacing:-5px;bottom:-8px;right:10px;color:rgba(255,255,255,.08)}
+.art-top{position:relative;font-size:11px;letter-spacing:2px}.art-num{position:relative;font-size:104px;font-weight:1000;line-height:1;margin-top:28px;color:#16c4e0}.art-name{position:relative;font-size:26px;font-weight:900}.art-sub{position:relative;font-size:12px;letter-spacing:2px;margin-top:8px}
+section{padding:26px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:16px}.section-head h2{margin:0;font-size:28px;letter-spacing:-.8px}.section-head p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.price{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.price h3{margin:0 0 8px;font-size:16px}.amount{font-size:30px;font-weight:950;letter-spacing:-1px}.amount small{font-size:13px;color:var(--muted);letter-spacing:0}.price p{font-size:13px;line-height:1.5;color:var(--muted);margin-bottom:0}
+.notice{background:#e8f9fc;border:1px solid #b7edf5;border-radius:14px;padding:13px 15px;font-size:13px;line-height:1.5;margin-top:12px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.tools input,.tools select{background:white;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:180px;color:var(--ink)}.tools input{flex:1}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.model{border:1px solid var(--line);background:white;border-radius:18px;overflow:hidden}
+.preview{height:215px;padding:12px;display:flex;align-items:stretch}
+.poster{position:relative;width:100%;overflow:hidden;border-radius:12px;padding:13px;color:white;display:flex;flex-direction:column;justify-content:space-between}
+.poster:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 30%,rgba(255,255,255,.12) 30%,transparent 31%),linear-gradient(35deg,transparent 50%,rgba(255,255,255,.08) 50%,transparent 51%);pointer-events:none}
+.poster .tiny{position:relative;font-size:8px;letter-spacing:1.6px;font-weight:800}
+.poster .num{position:relative;font-size:70px;line-height:.85;font-weight:1000;letter-spacing:-5px}
+.poster .pname{position:relative;font-size:19px;font-weight:950;line-height:1}
+.poster .pmeta{position:relative;font-size:8px;letter-spacing:1.3px;margin-top:7px}
+.poster .ball{position:absolute;right:-14px;top:50px;width:100px;height:100px;border:12px solid var(--accent);border-radius:50%;opacity:.8}
+.model-info{padding:12px 14px 14px}.model-info h3{margin:0 0 6px;font-size:15px}.model-info p{margin:0 0 10px;font-size:12px;line-height:1.45;color:var(--muted)}
+.meta-row{display:flex;justify-content:space-between;gap:8px;align-items:center}.tag{font-size:9px;font-weight:900;letter-spacing:1px;color:#078ca8}.mini-btn{border:0;border-radius:9px;padding:8px 10px;background:#e9f9fc;color:#075d71;font-size:11px;font-weight:800}
+.form-panel{background:white;border:1px solid var(--line);border-radius:22px;padding:22px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fbfdff;color:var(--ink)}.field textarea{min-height:92px;resize:vertical}.full{grid-column:1/-1}
+.primary{background:var(--ink);color:white;border:0;border-radius:12px;padding:14px 18px;font-weight:850;cursor:pointer}
+.form-note{font-size:12px;line-height:1.5;color:var(--muted)}
+footer{padding:30px 0 45px;color:var(--muted);font-size:12px;line-height:1.6}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-art{min-height:250px}}
+@media(max-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.preview{height:180px;padding:8px}.poster .num{font-size:55px}.poster .pname{font-size:15px}.model-info{padding:10px}.prices{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.section-head{display:block}.navnote{max-width:130px;text-align:right}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="logo">RI<span>S</span>E STUDIO</div><div class="navnote">FOOTBALL DESIGN · AGADIR & MAROC</div></nav>
+<header class="hero">
+<div>
+<div class="kicker">TON TALENT. NOTRE MISSION.</div>
+<h1>Ton parcours.<br><span style="color:#10b8d5">Ton identité.</span></h1>
+<p>Des affiches de joueurs, des fiches de parcours et des maquettes de sites pour présenter un joueur ou un club avec une image plus professionnelle.</p>
+<div class="pills"><span class="pill">Création sur commande</span><span class="pill">Prix annoncés à l’avance</span><span class="pill">Pas de montage vidéo</span></div>
+<a href="#commande"><button class="primary">Préparer ma demande</button></a>
+</div>
+<div class="hero-art"><div class="art-top">PLAYER DESIGN / 2026</div><div class="art-num">09</div><div class="art-name">YOUR NAME</div><div class="art-sub">FORWARD · MOROCCO</div></div>
+</header>
+<section id="offres">
+<div class="section-head"><div><h2>Nos offres</h2><p>Prix de lancement proposés — à tester avec les premiers clients.</p></div></div>
+<div class="prices">
+<div class="price"><h3>Affiche joueur</h3><div class="amount">30 <small>DH / visuel</small></div><p>Un design avec nom, numéro, poste et photo fournie par le client. Une retouche simple incluse.</p></div>
+<div class="price"><h3>Fiche joueur / parcours</h3><div class="amount">50 <small>DH / fiche</small></div><p>Profil sportif avec poste, pied fort, clubs, saisons et statistiques fournies par le joueur.</p></div>
+<div class="price"><h3>Maquette de site</h3><div class="amount">150 <small>DH / concept</small></div><p>Proposition visuelle pour un joueur ou un club. Ce prix concerne le design, pas le développement ni l’hébergement d’un site fonctionnel.</p></div>
+</div>
+<div class="notice"><strong>Important :</strong> les prix sont des tarifs de lancement à tester, pas des tarifs garantis par le marché. Au Maroc, des offres de graphisme affichent des visuels dès environ 50 DH et des créations sur mesure plus chères ; on garde l’affiche à 30 DH comme offre d’appel, puis on mesure les retours.</div>
+</section>
+<section id="catalogue">
+<div class="section-head"><div><h2>Catalogue — 50 concepts</h2><p>Choisis un modèle comme point de départ. Les exemples sont des maquettes fictives.</p></div></div>
+<div class="tools"><input id="search" type="search" placeholder="Rechercher un modèle, un style…"><select id="filter"><option value="all">Toutes les catégories</option><option>Affiche joueur</option><option>Fiche joueur</option><option>Maquette de site joueur</option><option>Maquette de site club</option><option>Carte parcours sportif</option></select></div>
+<div class="grid" id="catalog">
+<article class="model" data-type="Affiche joueur" data-search="VORTEX Affiche joueur CYAN PRO Énergie & vitesse Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#071d36,#071d36 55%,#11b8d5 56%);--accent:#11b8d5">
+      <div class="tiny">RISE STUDIO · CONCEPT 01</div><div class="ball"></div>
+      <div><div class="num">08</div><div class="pname">VORTEX</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">CYAN PRO / ÉNERGIE & VITESSE</div>
+    </div></div>
+    <div class="model-info"><h3>1. VORTEX</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">CYAN PRO</span><button class="mini-btn" type="button" onclick="chooseModel(1)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="NEXT GEN Fiche joueur ROYAL BLUE Minimaliste premium Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#081b3a,#081b3a 55%,#246bfe 56%);--accent:#246bfe">
+      <div class="tiny">RISE STUDIO · CONCEPT 02</div><div class="ball"></div>
+      <div><div class="num">15</div><div class="pname">NEXT GEN</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ROYAL BLUE / MINIMALISTE PREMIUM</div>
+    </div></div>
+    <div class="model-info"><h3>2. NEXT GEN</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ROYAL BLUE</span><button class="mini-btn" type="button" onclick="chooseModel(2)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="ELITE Maquette de site joueur GOLD STRIKE Portrait central Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#151515,#151515 55%,#f3bd32 56%);--accent:#f3bd32">
+      <div class="tiny">RISE STUDIO · CONCEPT 03</div><div class="ball"></div>
+      <div><div class="num">22</div><div class="pname">ELITE</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">GOLD STRIKE / PORTRAIT CENTRAL</div>
+    </div></div>
+    <div class="model-info"><h3>3. ELITE</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">GOLD STRIKE</span><button class="mini-btn" type="button" onclick="chooseModel(3)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="RISE STAR Maquette de site club RED IMPACT Typographie sportive Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#1b1014,#1b1014 55%,#f04444 56%);--accent:#f04444">
+      <div class="tiny">RISE STUDIO · CONCEPT 04</div><div class="ball"></div>
+      <div><div class="num">29</div><div class="pname">RISE STAR</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">RED IMPACT / TYPOGRAPHIE SPORTIVE</div>
+    </div></div>
+    <div class="model-info"><h3>4. RISE STAR</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">RED IMPACT</span><button class="mini-btn" type="button" onclick="chooseModel(4)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="MATCHDAY Carte parcours sportif LIME SPEED Statistiques & performance Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#111b17,#111b17 55%,#b7e432 56%);--accent:#b7e432">
+      <div class="tiny">RISE STUDIO · CONCEPT 05</div><div class="ball"></div>
+      <div><div class="num">36</div><div class="pname">MATCHDAY</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">LIME SPEED / STATISTIQUES & PERFORMANCE</div>
+    </div></div>
+    <div class="model-info"><h3>5. MATCHDAY</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">LIME SPEED</span><button class="mini-btn" type="button" onclick="chooseModel(5)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="THE ENGINE Affiche joueur PURPLE NIGHT Jeune talent Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#17152e,#17152e 55%,#9b7cff 56%);--accent:#9b7cff">
+      <div class="tiny">RISE STUDIO · CONCEPT 06</div><div class="ball"></div>
+      <div><div class="num">43</div><div class="pname">THE ENGINE</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">PURPLE NIGHT / JEUNE TALENT</div>
+    </div></div>
+    <div class="model-info"><h3>6. THE ENGINE</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">PURPLE NIGHT</span><button class="mini-btn" type="button" onclick="chooseModel(6)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="PLAYMAKER Fiche joueur ORANGE FIRE Capitaine Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24150d,#24150d 55%,#ff873d 56%);--accent:#ff873d">
+      <div class="tiny">RISE STUDIO · CONCEPT 07</div><div class="ball"></div>
+      <div><div class="num">50</div><div class="pname">PLAYMAKER</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ORANGE FIRE / CAPITAINE</div>
+    </div></div>
+    <div class="model-info"><h3>7. PLAYMAKER</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ORANGE FIRE</span><button class="mini-btn" type="button" onclick="chooseModel(7)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="FAST LANE Maquette de site joueur ICE WHITE Matchday Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#15283b,#15283b 55%,#dcecf6 56%);--accent:#dcecf6">
+      <div class="tiny">RISE STUDIO · CONCEPT 08</div><div class="ball"></div>
+      <div><div class="num">57</div><div class="pname">FAST LANE</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">ICE WHITE / MATCHDAY</div>
+    </div></div>
+    <div class="model-info"><h3>8. FAST LANE</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">ICE WHITE</span><button class="mini-btn" type="button" onclick="chooseModel(8)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="CAPTAIN Maquette de site club PINK FLASH Signature personnelle Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24111d,#24111d 55%,#ff6ea8 56%);--accent:#ff6ea8">
+      <div class="tiny">RISE STUDIO · CONCEPT 09</div><div class="ball"></div>
+      <div><div class="num">64</div><div class="pname">CAPTAIN</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">PINK FLASH / SIGNATURE PERSONNELLE</div>
+    </div></div>
+    <div class="model-info"><h3>9. CAPTAIN</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">PINK FLASH</span><button class="mini-btn" type="button" onclick="chooseModel(9)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="PROSPECT Carte parcours sportif MINT TOUCH Academy edition Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#102a28,#102a28 55%,#53d6ae 56%);--accent:#53d6ae">
+      <div class="tiny">RISE STUDIO · CONCEPT 10</div><div class="ball"></div>
+      <div><div class="num">71</div><div class="pname">PROSPECT</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">MINT TOUCH / ACADEMY EDITION</div>
+    </div></div>
+    <div class="model-info"><h3>10. PROSPECT</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">MINT TOUCH</span><button class="mini-btn" type="button" onclick="chooseModel(10)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="VISION Affiche joueur CYAN PRO Énergie & vitesse Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#071d36,#071d36 55%,#11b8d5 56%);--accent:#11b8d5">
+      <div class="tiny">RISE STUDIO · CONCEPT 11</div><div class="ball"></div>
+      <div><div class="num">78</div><div class="pname">VISION</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">CYAN PRO / ÉNERGIE & VITESSE</div>
+    </div></div>
+    <div class="model-info"><h3>11. VISION</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">CYAN PRO</span><button class="mini-btn" type="button" onclick="chooseModel(11)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="THE WALL Fiche joueur ROYAL BLUE Minimaliste premium Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#081b3a,#081b3a 55%,#246bfe 56%);--accent:#246bfe">
+      <div class="tiny">RISE STUDIO · CONCEPT 12</div><div class="ball"></div>
+      <div><div class="num">85</div><div class="pname">THE WALL</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ROYAL BLUE / MINIMALISTE PREMIUM</div>
+    </div></div>
+    <div class="model-info"><h3>12. THE WALL</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ROYAL BLUE</span><button class="mini-btn" type="button" onclick="chooseModel(12)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="FINISHER Maquette de site joueur GOLD STRIKE Portrait central Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#151515,#151515 55%,#f3bd32 56%);--accent:#f3bd32">
+      <div class="tiny">RISE STUDIO · CONCEPT 13</div><div class="ball"></div>
+      <div><div class="num">92</div><div class="pname">FINISHER</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">GOLD STRIKE / PORTRAIT CENTRAL</div>
+    </div></div>
+    <div class="model-info"><h3>13. FINISHER</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">GOLD STRIKE</span><button class="mini-btn" type="button" onclick="chooseModel(13)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="NUMBER ONE Maquette de site club RED IMPACT Typographie sportive Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#1b1014,#1b1014 55%,#f04444 56%);--accent:#f04444">
+      <div class="tiny">RISE STUDIO · CONCEPT 14</div><div class="ball"></div>
+      <div><div class="num">99</div><div class="pname">NUMBER ONE</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">RED IMPACT / TYPOGRAPHIE SPORTIVE</div>
+    </div></div>
+    <div class="model-info"><h3>14. NUMBER ONE</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">RED IMPACT</span><button class="mini-btn" type="button" onclick="chooseModel(14)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="BREAKTHROUGH Carte parcours sportif LIME SPEED Statistiques & performance Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#111b17,#111b17 55%,#b7e432 56%);--accent:#b7e432">
+      <div class="tiny">RISE STUDIO · CONCEPT 15</div><div class="ball"></div>
+      <div><div class="num">07</div><div class="pname">BREAKTHROUGH</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">LIME SPEED / STATISTIQUES & PERFORMANCE</div>
+    </div></div>
+    <div class="model-info"><h3>15. BREAKTHROUGH</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">LIME SPEED</span><button class="mini-btn" type="button" onclick="chooseModel(15)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="FUTURE PRO Affiche joueur PURPLE NIGHT Jeune talent Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#17152e,#17152e 55%,#9b7cff 56%);--accent:#9b7cff">
+      <div class="tiny">RISE STUDIO · CONCEPT 16</div><div class="ball"></div>
+      <div><div class="num">14</div><div class="pname">FUTURE PRO</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">PURPLE NIGHT / JEUNE TALENT</div>
+    </div></div>
+    <div class="model-info"><h3>16. FUTURE PRO</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">PURPLE NIGHT</span><button class="mini-btn" type="button" onclick="chooseModel(16)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="THE ARTIST Fiche joueur ORANGE FIRE Capitaine Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24150d,#24150d 55%,#ff873d 56%);--accent:#ff873d">
+      <div class="tiny">RISE STUDIO · CONCEPT 17</div><div class="ball"></div>
+      <div><div class="num">21</div><div class="pname">THE ARTIST</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ORANGE FIRE / CAPITAINE</div>
+    </div></div>
+    <div class="model-info"><h3>17. THE ARTIST</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ORANGE FIRE</span><button class="mini-btn" type="button" onclick="chooseModel(17)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="GAME CHANGER Maquette de site joueur ICE WHITE Matchday Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#15283b,#15283b 55%,#dcecf6 56%);--accent:#dcecf6">
+      <div class="tiny">RISE STUDIO · CONCEPT 18</div><div class="ball"></div>
+      <div><div class="num">28</div><div class="pname">GAME CHANGER</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">ICE WHITE / MATCHDAY</div>
+    </div></div>
+    <div class="model-info"><h3>18. GAME CHANGER</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">ICE WHITE</span><button class="mini-btn" type="button" onclick="chooseModel(18)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="CLUTCH Maquette de site club PINK FLASH Signature personnelle Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24111d,#24111d 55%,#ff6ea8 56%);--accent:#ff6ea8">
+      <div class="tiny">RISE STUDIO · CONCEPT 19</div><div class="ball"></div>
+      <div><div class="num">35</div><div class="pname">CLUTCH</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">PINK FLASH / SIGNATURE PERSONNELLE</div>
+    </div></div>
+    <div class="model-info"><h3>19. CLUTCH</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">PINK FLASH</span><button class="mini-btn" type="button" onclick="chooseModel(19)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="WING SPEED Carte parcours sportif MINT TOUCH Academy edition Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#102a28,#102a28 55%,#53d6ae 56%);--accent:#53d6ae">
+      <div class="tiny">RISE STUDIO · CONCEPT 20</div><div class="ball"></div>
+      <div><div class="num">42</div><div class="pname">WING SPEED</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">MINT TOUCH / ACADEMY EDITION</div>
+    </div></div>
+    <div class="model-info"><h3>20. WING SPEED</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">MINT TOUCH</span><button class="mini-btn" type="button" onclick="chooseModel(20)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="THE ANCHOR Affiche joueur CYAN PRO Énergie & vitesse Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#071d36,#071d36 55%,#11b8d5 56%);--accent:#11b8d5">
+      <div class="tiny">RISE STUDIO · CONCEPT 21</div><div class="ball"></div>
+      <div><div class="num">49</div><div class="pname">THE ANCHOR</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">CYAN PRO / ÉNERGIE & VITESSE</div>
+    </div></div>
+    <div class="model-info"><h3>21. THE ANCHOR</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">CYAN PRO</span><button class="mini-btn" type="button" onclick="chooseModel(21)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="STRIKER MODE Fiche joueur ROYAL BLUE Minimaliste premium Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#081b3a,#081b3a 55%,#246bfe 56%);--accent:#246bfe">
+      <div class="tiny">RISE STUDIO · CONCEPT 22</div><div class="ball"></div>
+      <div><div class="num">56</div><div class="pname">STRIKER MODE</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ROYAL BLUE / MINIMALISTE PREMIUM</div>
+    </div></div>
+    <div class="model-info"><h3>22. STRIKER MODE</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ROYAL BLUE</span><button class="mini-btn" type="button" onclick="chooseModel(22)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="RISING TALENT Maquette de site joueur GOLD STRIKE Portrait central Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#151515,#151515 55%,#f3bd32 56%);--accent:#f3bd32">
+      <div class="tiny">RISE STUDIO · CONCEPT 23</div><div class="ball"></div>
+      <div><div class="num">63</div><div class="pname">RISING TALENT</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">GOLD STRIKE / PORTRAIT CENTRAL</div>
+    </div></div>
+    <div class="model-info"><h3>23. RISING TALENT</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">GOLD STRIKE</span><button class="mini-btn" type="button" onclick="chooseModel(23)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="THE LEADER Maquette de site club RED IMPACT Typographie sportive Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#1b1014,#1b1014 55%,#f04444 56%);--accent:#f04444">
+      <div class="tiny">RISE STUDIO · CONCEPT 24</div><div class="ball"></div>
+      <div><div class="num">70</div><div class="pname">THE LEADER</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">RED IMPACT / TYPOGRAPHIE SPORTIVE</div>
+    </div></div>
+    <div class="model-info"><h3>24. THE LEADER</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">RED IMPACT</span><button class="mini-btn" type="button" onclick="chooseModel(24)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="PURE CLASS Carte parcours sportif LIME SPEED Statistiques & performance Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#111b17,#111b17 55%,#b7e432 56%);--accent:#b7e432">
+      <div class="tiny">RISE STUDIO · CONCEPT 25</div><div class="ball"></div>
+      <div><div class="num">77</div><div class="pname">PURE CLASS</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">LIME SPEED / STATISTIQUES & PERFORMANCE</div>
+    </div></div>
+    <div class="model-info"><h3>25. PURE CLASS</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">LIME SPEED</span><button class="mini-btn" type="button" onclick="chooseModel(25)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="THE CREATOR Affiche joueur PURPLE NIGHT Jeune talent Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#17152e,#17152e 55%,#9b7cff 56%);--accent:#9b7cff">
+      <div class="tiny">RISE STUDIO · CONCEPT 26</div><div class="ball"></div>
+      <div><div class="num">84</div><div class="pname">THE CREATOR</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">PURPLE NIGHT / JEUNE TALENT</div>
+    </div></div>
+    <div class="model-info"><h3>26. THE CREATOR</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">PURPLE NIGHT</span><button class="mini-btn" type="button" onclick="chooseModel(26)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="ROAD TO PRO Fiche joueur ORANGE FIRE Capitaine Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24150d,#24150d 55%,#ff873d 56%);--accent:#ff873d">
+      <div class="tiny">RISE STUDIO · CONCEPT 27</div><div class="ball"></div>
+      <div><div class="num">91</div><div class="pname">ROAD TO PRO</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ORANGE FIRE / CAPITAINE</div>
+    </div></div>
+    <div class="model-info"><h3>27. ROAD TO PRO</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ORANGE FIRE</span><button class="mini-btn" type="button" onclick="chooseModel(27)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="THE GENERAL Maquette de site joueur ICE WHITE Matchday Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#15283b,#15283b 55%,#dcecf6 56%);--accent:#dcecf6">
+      <div class="tiny">RISE STUDIO · CONCEPT 28</div><div class="ball"></div>
+      <div><div class="num">98</div><div class="pname">THE GENERAL</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">ICE WHITE / MATCHDAY</div>
+    </div></div>
+    <div class="model-info"><h3>28. THE GENERAL</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">ICE WHITE</span><button class="mini-btn" type="button" onclick="chooseModel(28)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="SILENT FORCE Maquette de site club PINK FLASH Signature personnelle Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24111d,#24111d 55%,#ff6ea8 56%);--accent:#ff6ea8">
+      <div class="tiny">RISE STUDIO · CONCEPT 29</div><div class="ball"></div>
+      <div><div class="num">06</div><div class="pname">SILENT FORCE</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">PINK FLASH / SIGNATURE PERSONNELLE</div>
+    </div></div>
+    <div class="model-info"><h3>29. SILENT FORCE</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">PINK FLASH</span><button class="mini-btn" type="button" onclick="chooseModel(29)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="DYNAMIC Carte parcours sportif MINT TOUCH Academy edition Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#102a28,#102a28 55%,#53d6ae 56%);--accent:#53d6ae">
+      <div class="tiny">RISE STUDIO · CONCEPT 30</div><div class="ball"></div>
+      <div><div class="num">13</div><div class="pname">DYNAMIC</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">MINT TOUCH / ACADEMY EDITION</div>
+    </div></div>
+    <div class="model-info"><h3>30. DYNAMIC</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">MINT TOUCH</span><button class="mini-btn" type="button" onclick="chooseModel(30)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="TOP FORM Affiche joueur CYAN PRO Énergie & vitesse Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#071d36,#071d36 55%,#11b8d5 56%);--accent:#11b8d5">
+      <div class="tiny">RISE STUDIO · CONCEPT 31</div><div class="ball"></div>
+      <div><div class="num">20</div><div class="pname">TOP FORM</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">CYAN PRO / ÉNERGIE & VITESSE</div>
+    </div></div>
+    <div class="model-info"><h3>31. TOP FORM</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">CYAN PRO</span><button class="mini-btn" type="button" onclick="chooseModel(31)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="THE SPECIALIST Fiche joueur ROYAL BLUE Minimaliste premium Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#081b3a,#081b3a 55%,#246bfe 56%);--accent:#246bfe">
+      <div class="tiny">RISE STUDIO · CONCEPT 32</div><div class="ball"></div>
+      <div><div class="num">27</div><div class="pname">THE SPECIALIST</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ROYAL BLUE / MINIMALISTE PREMIUM</div>
+    </div></div>
+    <div class="model-info"><h3>32. THE SPECIALIST</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ROYAL BLUE</span><button class="mini-btn" type="button" onclick="chooseModel(32)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="NEXT LEVEL Maquette de site joueur GOLD STRIKE Portrait central Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#151515,#151515 55%,#f3bd32 56%);--accent:#f3bd32">
+      <div class="tiny">RISE STUDIO · CONCEPT 33</div><div class="ball"></div>
+      <div><div class="num">34</div><div class="pname">NEXT LEVEL</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">GOLD STRIKE / PORTRAIT CENTRAL</div>
+    </div></div>
+    <div class="model-info"><h3>33. NEXT LEVEL</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">GOLD STRIKE</span><button class="mini-btn" type="button" onclick="chooseModel(33)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="THE SHIELD Maquette de site club RED IMPACT Typographie sportive Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#1b1014,#1b1014 55%,#f04444 56%);--accent:#f04444">
+      <div class="tiny">RISE STUDIO · CONCEPT 34</div><div class="ball"></div>
+      <div><div class="num">41</div><div class="pname">THE SHIELD</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">RED IMPACT / TYPOGRAPHIE SPORTIVE</div>
+    </div></div>
+    <div class="model-info"><h3>34. THE SHIELD</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">RED IMPACT</span><button class="mini-btn" type="button" onclick="chooseModel(34)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="THE FINISH Carte parcours sportif LIME SPEED Statistiques & performance Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#111b17,#111b17 55%,#b7e432 56%);--accent:#b7e432">
+      <div class="tiny">RISE STUDIO · CONCEPT 35</div><div class="ball"></div>
+      <div><div class="num">48</div><div class="pname">THE FINISH</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">LIME SPEED / STATISTIQUES & PERFORMANCE</div>
+    </div></div>
+    <div class="model-info"><h3>35. THE FINISH</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">LIME SPEED</span><button class="mini-btn" type="button" onclick="chooseModel(35)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="FIELD VISION Affiche joueur PURPLE NIGHT Jeune talent Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#17152e,#17152e 55%,#9b7cff 56%);--accent:#9b7cff">
+      <div class="tiny">RISE STUDIO · CONCEPT 36</div><div class="ball"></div>
+      <div><div class="num">55</div><div class="pname">FIELD VISION</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">PURPLE NIGHT / JEUNE TALENT</div>
+    </div></div>
+    <div class="model-info"><h3>36. FIELD VISION</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">PURPLE NIGHT</span><button class="mini-btn" type="button" onclick="chooseModel(36)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="THE RUNNER Fiche joueur ORANGE FIRE Capitaine Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24150d,#24150d 55%,#ff873d 56%);--accent:#ff873d">
+      <div class="tiny">RISE STUDIO · CONCEPT 37</div><div class="ball"></div>
+      <div><div class="num">62</div><div class="pname">THE RUNNER</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ORANGE FIRE / CAPITAINE</div>
+    </div></div>
+    <div class="model-info"><h3>37. THE RUNNER</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ORANGE FIRE</span><button class="mini-btn" type="button" onclick="chooseModel(37)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="PROGRESS Maquette de site joueur ICE WHITE Matchday Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#15283b,#15283b 55%,#dcecf6 56%);--accent:#dcecf6">
+      <div class="tiny">RISE STUDIO · CONCEPT 38</div><div class="ball"></div>
+      <div><div class="num">69</div><div class="pname">PROGRESS</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">ICE WHITE / MATCHDAY</div>
+    </div></div>
+    <div class="model-info"><h3>38. PROGRESS</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">ICE WHITE</span><button class="mini-btn" type="button" onclick="chooseModel(38)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="THE ACE Maquette de site club PINK FLASH Signature personnelle Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24111d,#24111d 55%,#ff6ea8 56%);--accent:#ff6ea8">
+      <div class="tiny">RISE STUDIO · CONCEPT 39</div><div class="ball"></div>
+      <div><div class="num">76</div><div class="pname">THE ACE</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">PINK FLASH / SIGNATURE PERSONNELLE</div>
+    </div></div>
+    <div class="model-info"><h3>39. THE ACE</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">PINK FLASH</span><button class="mini-btn" type="button" onclick="chooseModel(39)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="ACADEMY STAR Carte parcours sportif MINT TOUCH Academy edition Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#102a28,#102a28 55%,#53d6ae 56%);--accent:#53d6ae">
+      <div class="tiny">RISE STUDIO · CONCEPT 40</div><div class="ball"></div>
+      <div><div class="num">83</div><div class="pname">ACADEMY STAR</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">MINT TOUCH / ACADEMY EDITION</div>
+    </div></div>
+    <div class="model-info"><h3>40. ACADEMY STAR</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">MINT TOUCH</span><button class="mini-btn" type="button" onclick="chooseModel(40)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="THE PLAY Affiche joueur CYAN PRO Énergie & vitesse Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#071d36,#071d36 55%,#11b8d5 56%);--accent:#11b8d5">
+      <div class="tiny">RISE STUDIO · CONCEPT 41</div><div class="ball"></div>
+      <div><div class="num">90</div><div class="pname">THE PLAY</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">CYAN PRO / ÉNERGIE & VITESSE</div>
+    </div></div>
+    <div class="model-info"><h3>41. THE PLAY</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">CYAN PRO</span><button class="mini-btn" type="button" onclick="chooseModel(41)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="FOOTBALL DNA Fiche joueur ROYAL BLUE Minimaliste premium Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#081b3a,#081b3a 55%,#246bfe 56%);--accent:#246bfe">
+      <div class="tiny">RISE STUDIO · CONCEPT 42</div><div class="ball"></div>
+      <div><div class="num">97</div><div class="pname">FOOTBALL DNA</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ROYAL BLUE / MINIMALISTE PREMIUM</div>
+    </div></div>
+    <div class="model-info"><h3>42. FOOTBALL DNA</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ROYAL BLUE</span><button class="mini-btn" type="button" onclick="chooseModel(42)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="THE FUTURE Maquette de site joueur GOLD STRIKE Portrait central Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#151515,#151515 55%,#f3bd32 56%);--accent:#f3bd32">
+      <div class="tiny">RISE STUDIO · CONCEPT 43</div><div class="ball"></div>
+      <div><div class="num">05</div><div class="pname">THE FUTURE</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">GOLD STRIKE / PORTRAIT CENTRAL</div>
+    </div></div>
+    <div class="model-info"><h3>43. THE FUTURE</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">GOLD STRIKE</span><button class="mini-btn" type="button" onclick="chooseModel(43)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="ONE TO WATCH Maquette de site club RED IMPACT Typographie sportive Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#1b1014,#1b1014 55%,#f04444 56%);--accent:#f04444">
+      <div class="tiny">RISE STUDIO · CONCEPT 44</div><div class="ball"></div>
+      <div><div class="num">12</div><div class="pname">ONE TO WATCH</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">RED IMPACT / TYPOGRAPHIE SPORTIVE</div>
+    </div></div>
+    <div class="model-info"><h3>44. ONE TO WATCH</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">RED IMPACT</span><button class="mini-btn" type="button" onclick="chooseModel(44)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="THE MAGICIAN Carte parcours sportif LIME SPEED Statistiques & performance Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#111b17,#111b17 55%,#b7e432 56%);--accent:#b7e432">
+      <div class="tiny">RISE STUDIO · CONCEPT 45</div><div class="ball"></div>
+      <div><div class="num">19</div><div class="pname">THE MAGICIAN</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">LIME SPEED / STATISTIQUES & PERFORMANCE</div>
+    </div></div>
+    <div class="model-info"><h3>45. THE MAGICIAN</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">LIME SPEED</span><button class="mini-btn" type="button" onclick="chooseModel(45)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Affiche joueur" data-search="THE ROCK Affiche joueur PURPLE NIGHT Jeune talent Composition dynamique avec nom, numéro et poste." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#17152e,#17152e 55%,#9b7cff 56%);--accent:#9b7cff">
+      <div class="tiny">RISE STUDIO · CONCEPT 46</div><div class="ball"></div>
+      <div><div class="num">26</div><div class="pname">THE ROCK</div><div class="pmeta">POSTER · PLAYER DESIGN</div></div>
+      <div class="tiny">PURPLE NIGHT / JEUNE TALENT</div>
+    </div></div>
+    <div class="model-info"><h3>46. THE ROCK</h3><p><strong>Affiche joueur</strong><br>Composition dynamique avec nom, numéro et poste.</p><div class="meta-row"><span class="tag">PURPLE NIGHT</span><button class="mini-btn" type="button" onclick="chooseModel(46)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Fiche joueur" data-search="GAME FACE Fiche joueur ORANGE FIRE Capitaine Design épuré pour présenter un joueur avec style." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24150d,#24150d 55%,#ff873d 56%);--accent:#ff873d">
+      <div class="tiny">RISE STUDIO · CONCEPT 47</div><div class="ball"></div>
+      <div><div class="num">33</div><div class="pname">GAME FACE</div><div class="pmeta">PLAYER CARD · PLAYER DESIGN</div></div>
+      <div class="tiny">ORANGE FIRE / CAPITAINE</div>
+    </div></div>
+    <div class="model-info"><h3>47. GAME FACE</h3><p><strong>Fiche joueur</strong><br>Design épuré pour présenter un joueur avec style.</p><div class="meta-row"><span class="tag">ORANGE FIRE</span><button class="mini-btn" type="button" onclick="chooseModel(47)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site joueur" data-search="BREAK THE LINE Maquette de site joueur ICE WHITE Matchday Présentation sportive pensée pour un profil individuel." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#15283b,#15283b 55%,#dcecf6 56%);--accent:#dcecf6">
+      <div class="tiny">RISE STUDIO · CONCEPT 48</div><div class="ball"></div>
+      <div><div class="num">40</div><div class="pname">BREAK THE LINE</div><div class="pmeta">PLAYER WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">ICE WHITE / MATCHDAY</div>
+    </div></div>
+    <div class="model-info"><h3>48. BREAK THE LINE</h3><p><strong>Maquette de site joueur</strong><br>Présentation sportive pensée pour un profil individuel.</p><div class="meta-row"><span class="tag">ICE WHITE</span><button class="mini-btn" type="button" onclick="chooseModel(48)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Maquette de site club" data-search="RISE PROFILE Maquette de site club PINK FLASH Signature personnelle Structure visuelle pour présenter une équipe ou un club." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#24111d,#24111d 55%,#ff6ea8 56%);--accent:#ff6ea8">
+      <div class="tiny">RISE STUDIO · CONCEPT 49</div><div class="ball"></div>
+      <div><div class="num">47</div><div class="pname">RISE PROFILE</div><div class="pmeta">CLUB WEBSITE · PLAYER DESIGN</div></div>
+      <div class="tiny">PINK FLASH / SIGNATURE PERSONNELLE</div>
+    </div></div>
+    <div class="model-info"><h3>49. RISE PROFILE</h3><p><strong>Maquette de site club</strong><br>Structure visuelle pour présenter une équipe ou un club.</p><div class="meta-row"><span class="tag">PINK FLASH</span><button class="mini-btn" type="button" onclick="chooseModel(49)">Choisir</button></div></div>
+  </article>
+<article class="model" data-type="Carte parcours sportif" data-search="LEGACY Carte parcours sportif MINT TOUCH Academy edition Résumé clair du parcours, des clubs et des saisons." style="display:block">
+    <div class="preview"><div class="poster" style="background:linear-gradient(150deg,#102a28,#102a28 55%,#53d6ae 56%);--accent:#53d6ae">
+      <div class="tiny">RISE STUDIO · CONCEPT 50</div><div class="ball"></div>
+      <div><div class="num">54</div><div class="pname">LEGACY</div><div class="pmeta">CAREER PROFILE · PLAYER DESIGN</div></div>
+      <div class="tiny">MINT TOUCH / ACADEMY EDITION</div>
+    </div></div>
+    <div class="model-info"><h3>50. LEGACY</h3><p><strong>Carte parcours sportif</strong><br>Résumé clair du parcours, des clubs et des saisons.</p><div class="meta-row"><span class="tag">MINT TOUCH</span><button class="mini-btn" type="button" onclick="chooseModel(50)">Choisir</button></div></div>
+  </article>
+</div>
+</section>
+<section id="commande">
+<div class="section-head"><div><h2>Infos du joueur</h2><p>Le joueur remplit ce formulaire pour préparer sa commande.</p></div></div>
+<div class="form-panel">
+<form id="playerForm">
+<div class="form-grid">
+<div class="field"><label for="name">Nom et prénom / nom sportif *</label><input id="name" name="name" required placeholder="Ex. Yassine A."></div>
+<div class="field"><label for="number">Numéro de maillot</label><input id="number" name="number" placeholder="Ex. 9"></div>
+<div class="field"><label for="position">Poste *</label><select id="position" name="position" required><option value="">Choisir…</option><option>Gardien</option><option>Défenseur central</option><option>Latéral droit</option><option>Latéral gauche</option><option>Milieu défensif</option><option>Milieu central</option><option>Milieu offensif</option><option>Ailier droit</option><option>Ailier gauche</option><option>Avant-centre</option><option>Polyvalent</option></select></div>
+<div class="field"><label for="foot">Pied fort</label><select id="foot" name="foot"><option>Non précisé</option><option>Droit</option><option>Gauche</option><option>Les deux</option></select></div>
+<div class="field"><label for="age">Âge / catégorie</label><input id="age" name="age" placeholder="Ex. U17 ou senior"></div>
+<div class="field"><label for="club">Club actuel</label><input id="club" name="club" placeholder="Nom du club"></div>
+<div class="field full"><label for="career">Parcours sportif (clubs, années, sélections)</label><textarea id="career" name="career" placeholder="Ex. 2023–2024 : Club A · 2024–2026 : Club B"></textarea></div>
+<div class="field"><label for="stats">Statistiques / distinctions (facultatif)</label><input id="stats" name="stats" placeholder="Uniquement les informations vérifiées"></div>
+<div class="field"><label for="product">Produit souhaité *</label><select id="product" name="product" required><option value="">Choisir…</option><option>Affiche joueur — 30 DH</option><option>Fiche joueur — 50 DH</option><option>Maquette de site joueur — dès 150 DH</option><option>Maquette de site club — dès 150 DH</option></select></div>
+<div class="field"><label for="contact">WhatsApp ou e-mail de contact *</label><input id="contact" name="contact" required placeholder="Coordonnée pour vous répondre"></div>
+<div class="field"><label for="model">Numéro du modèle choisi</label><input id="model" name="model" placeholder="Ex. modèle 12"></div>
+<div class="field full"><label for="notes">Autres demandes</label><textarea id="notes" name="notes" placeholder="Couleurs, style, texte à afficher…"></textarea></div>
+<div class="field full"><label for="photo">Photo / logo</label><input id="photo" name="photo" placeholder="À transmettre séparément après accord, si nécessaire"></div>
+<div class="field full"><button class="primary" type="submit">Préparer le message de commande</button><p class="form-note">Ce formulaire est une maquette locale : il n’envoie pas automatiquement les données et ne stocke rien sur un serveur. Le bouton prépare un texte que le client peut copier et envoyer. Ne demande pas de mot de passe ni de documents sensibles.</p></div>
+</div>
+</form>
+<div id="result" class="notice" hidden></div>
+</div>
+</section>
+<footer><strong>RISE STUDIO</strong> — TON TALENT. NOTRE MISSION.<br>Les 50 concepts sont des démonstrations de design, pas 50 sites fonctionnels. Les photos, logos, statistiques et parcours définitifs doivent être fournis ou autorisés par le client. Les prix et les délais sont confirmés avant toute commande.</footer>
+</div>
+<script>
+const catalog = document.getElementById('catalog');
+const search = document.getElementById('search');
+const filter = document.getElementById('filter');
+function render(){
+  const q=search.value.trim().toLowerCase(), f=filter.value;
+  catalog.querySelectorAll('.model').forEach(card=>{
+    const matchesType=(f==='all'||card.dataset.type===f);
+    const matchesText=card.dataset.search.toLowerCase().includes(q);
+    card.style.display=matchesType&&matchesText?'block':'none';
+  });
+}
+function chooseModel(n){document.getElementById('model').value='Modèle '+n;document.getElementById('commande').scrollIntoView({behavior:'smooth'});}
+search.addEventListener('input',render);filter.addEventListener('change',render);
+document.getElementById('playerForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const fd=new FormData(this);
+  const lines=[
+    "Demande RISE STUDIO",
+    "Nom : "+(fd.get('name')||""),
+    "Numéro : "+(fd.get('number')||"Non précisé"),
+    "Poste : "+(fd.get('position')||""),
+    "Pied fort : "+(fd.get('foot')||""),
+    "Âge/catégorie : "+(fd.get('age')||"Non précisé"),
+    "Club actuel : "+(fd.get('club')||"Non précisé"),
+    "Parcours : "+(fd.get('career')||"Non précisé"),
+    "Statistiques/distinctions : "+(fd.get('stats')||"Non précisé"),
+    "Produit : "+(fd.get('product')||""),
+    "Contact : "+(fd.get('contact')||""),
+    "Modèle : "+(fd.get('model')||"Non précisé"),
+    "Autres demandes : "+(fd.get('notes')||"Non précisé")
+  ].join("\\n");
+  const result=document.getElementById('result');
+  result.hidden=false;
+  result.innerHTML='<strong>Demande prête.</strong><p>Appuie sur le bouton ci-dessous pour ouvrir WhatsApp et envoyer ta demande directement à RISE Studio. Vérifie le message avant de l’envoyer :</p><textarea id="prepared" style="width:100%;min-height:200px;border:1px solid #b7edf5;border-radius:10px;padding:10px"></textarea><p><a class="primary" id="sendWA" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block;text-decoration:none;margin-top:10px">Ouvrir WhatsApp et envoyer ↗</a></p><button type="button" class="primary" id="copyMsg" style="margin-top:10px">Copier le message</button>';
+  document.getElementById('prepared').value=lines;
+  document.getElementById('sendWA').href='https://wa.me/33633919915?text='+encodeURIComponent(lines);
+  document.getElementById('copyMsg').addEventListener('click',async()=>{
+    const t=document.getElementById('prepared');
+    try{await navigator.clipboard.writeText(t.value);document.getElementById('copyMsg').textContent='Copié';}
+    catch(e){t.focus();t.select();document.execCommand('copy');document.getElementById('copyMsg').textContent='Sélectionné — copie si nécessaire';}
+  });
+  result.scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body></html>
